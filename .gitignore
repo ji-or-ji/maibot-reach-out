@@ -1,0 +1,9 @@
+# 运行配置不进版本控制，参照 config.example.toml 自行创建
+config.toml
+
+__pycache__/
+*.pyc
+*.pyo
+data/
+.pytest_cache/
+.DS_Store

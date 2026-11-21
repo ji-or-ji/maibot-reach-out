@@ -1,0 +1,53 @@
+# 麦麦主动私聊 Pro — 配置示例
+# 复制为 config.toml 后按需修改。所有项都可在 WebUI 里改。
+
+[plugin]
+enabled = true
+config_version = "1.0.0"
+
+[scope]
+# 谁能触发。留空表示谁都可以叫麦麦去私聊别人。
+# 公开场合建议填上自己，避免被陌生人当作发消息的通道。
+requester_whitelist = []
+
+# 只允许主动联系这些人。留空表示除黑名单外都能找。
+target_whitelist = []
+
+# 永远不主动联系这些人，优先级高于白名单。
+target_blacklist = []
+
+# 名字模糊匹配时最多扫几个群找成员，从最活跃的群开始。
+max_group_scan = 8
+
+[limits]
+# ── 同一个人每天最多几次、两次之间至少隔多久 ──
+daily_per_target = 2          # 每人每日上限
+min_interval_minutes = 180    # 对同一人的最小间隔（分钟）
+
+# 允许开口的时段，支持跨夜（如 22:00 到 02:00）
+active_start = "08:00"
+active_end = "23:30"
+
+# 两次主动私聊之间的全局间隔，避免连着找好几个人
+global_cooldown_seconds = 45
+
+[style]
+max_chars = 48                # 生成内容字数上限
+temperature = 1.05
+model_slot = "replyer"        # 用哪个模型槽位生成
+use_private_history = true    # 生成前读一遍与对方的私聊，语气才接得上
+history_limit = 8
+allow_mention_source = true   # 是否允许说「刚在群里看到」
+send_delay_seconds = 1.2
+
+[behavior]
+platform = "qq"
+dry_run = false               # 只生成不发送，用来试口吻
+ack_enabled = true            # 发完给触发者回一句
+dedup_window_seconds = 120
+
+[thought]
+# ── 走神：忽然想到某人就开口，比受人所托更严 ──
+enabled = true
+daily_limit = 2               # 对同一个人每天最多几次走神
+min_interval_minutes = 120    # 对同一人两次走神的最小间隔（分钟）
